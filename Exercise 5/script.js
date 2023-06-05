@@ -13,7 +13,7 @@ function isnumber(x,y){
 
 function sum(x,y){
     let customPromise = new Promise((resolve, reject)=>{
-        let result1 = +x + +y;
+        let result1 = (+x) + (+y);
         let resultfn = isnumber(x,y);
         if(resultfn == true){
             reject(new Error("Not Valid...!"));
@@ -67,7 +67,19 @@ function division(x,y){
     return customPromise;
 }
 
-sum(x,y).then(data=>{
+//Using Promise.all() method.
+
+Promise.all([sum(x,y), sub(x,y), mult(x,y), division(x,y)]).then(values =>{
+    try{
+        console.log(values);
+        sum = values.reduce((x,y) => x+y, 0);
+        console.log("Total Sum :",sum);
+    }catch{
+        console.log("Invalid input...!");
+    }
+});
+
+/* sum(x,y).then(data=>{
     r1 = data;
     console.log("Sum :", r1);
     sub(x,y).then(data=>{
@@ -95,4 +107,4 @@ sum(x,y).then(data=>{
 })
 .catch(err=>{
     console.log(err.message);
-});
+}); */

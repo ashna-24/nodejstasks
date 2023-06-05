@@ -19,7 +19,7 @@ function sum(x,y,callbackrslt){
             callbackrslt(error);
         }
         else{
-            result1 = +x + +y;
+            result1 = (+x) + (+y);
             callbackrslt(null,result1);
         }
     },100);

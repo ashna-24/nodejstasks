@@ -20,7 +20,7 @@ else{
                 return;
             }
             else{
-                sum = +sum + +args[i];
+                sum = (+sum) + (+args[i]);
             }
         }
         console.log(sum);
