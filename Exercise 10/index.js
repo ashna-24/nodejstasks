@@ -2,38 +2,56 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
-
+const fs = require('fs');
 const port = 8000;
 
 app.use('/uploads', express.static(path.join(__dirname, '/images')));
 
+app.post('/upload', (req, res, next) => {
+    
+    var storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'images');
+        },
+        filename: (req, file, cb) => {
+            console.log(file);
+            cb(null, Date.now() + path.extname(file.originalname));
+            return file;
+        }
+    });
+    
+    var upload = multer({storage: storage}).single('image');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads');
-    },
-    filename: (req, file, cb) => {
-        console.log(file);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+    upload(req,res,function(error){
+        if (error) {
+            console.error(error);
+            return res.status(201).json({
+                status: "failed",
+                message: 'File uploded failed'
+            });
+        }
+        else {
+            res.send(req.file)
+            return res.status(201).json({
+                status: "success",
+                message: 'File uploded successfully',
+            });
+        } 
+    })
 });
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
-const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-app.post('/upload', upload.single('image'), (req, res, next) => {
-    try {
-        return res.status(201).json({
-            message: 'File uploded successfully'
-        });
-    } catch (error) {
-        console.error(error);
-    }
+app.get('/download/:id', function(req, res){
+    const files = `${__dirname}/images/${String(req.params.id)}`;
+   /*  res.download(files); */
+    fs.readFile(files, (err, file) => {
+        if (err) {
+            return res.status(201).send('Could not download file');
+        }
+        res.setHeader('Content-Type', 'image.jpg');
+        res.send(file);
+    });
 });
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+app.listen(port, () => 
+    console.log(`Hello world app listening on port ${port}!`)
+);
