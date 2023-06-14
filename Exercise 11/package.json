@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start:dev": "nodemon index",
+    "start": "node index"
+  },
+  "dependencies": {
+    "dotenv": "^16.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
