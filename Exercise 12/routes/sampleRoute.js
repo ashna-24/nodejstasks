@@ -1,33 +1,19 @@
 const express = require("express");
 const router = express.Router();
-
-// Require controller modules.
+const bodyparser = require('body-parser');
 const book_controller = require("../controllers/sampleControllers");
 
-router.get("/", book_controller.index);
+router.use(bodyparser.urlencoded({extended: false}));
+router.use(bodyparser.json());
 
-// GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get("/book", book_controller.book_create_get);
+router.post("/book",book_controller.book_create);
 
-// POST request for creating Book.
-router.post("/book", book_controller.book_create_post);
+router.get("/books",book_controller.book_list);
 
-// GET request to delete Book.
-router.get("/book/:id/delete", book_controller.book_delete_get);
+router.get("/book/:id",book_controller.book_detail);
 
-// POST request to delete Book.
-router.post("/book/:id/delete", book_controller.book_delete_post);
+router.delete("/book/:id", book_controller.book_delete);
 
-// GET request to update Book.
-router.get("/book/:id/update", book_controller.book_update_get);
-
-// POST request to update Book.
-router.post("/book/:id/update", book_controller.book_update_post);
-
-// GET request for one Book.
-router.get("/book/:id", book_controller.book_detail);
-
-// GET request for list of all Book items.
-router.get("/books", book_controller.book_list);
+router.put("/book/:id",book_controller.book_update);
 
 module.exports = router;
