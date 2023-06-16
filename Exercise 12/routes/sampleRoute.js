@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const cookieParser = require("cookie-parser");
 const bodyparser = require('body-parser');
 const book_controller = require("../controllers/sampleControllers");
 
+router.use(cookieParser());
 router.use(bodyparser.urlencoded({extended: false}));
 router.use(bodyparser.json());
 

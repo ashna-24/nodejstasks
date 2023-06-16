@@ -2,10 +2,10 @@ const express = require("express");
 const path = require('path');
 const app = express();
 var PORT = 8000;
-  
+/*   
 // View Engine Setup
 app.set("views", path.join(__dirname));
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); */
   
 app.get("/user", function(req, res){
   
