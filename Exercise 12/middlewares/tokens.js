@@ -7,6 +7,7 @@ const token = jwt.sign({ username }, jwtKey, {
     algorithm: "HS256",
     expiresIn: jwtExpirySeconds,
 });
-console.log("token:", token);
 
-module.exports=token;
+const userdata = [];
+
+module.exports={token,userdata};

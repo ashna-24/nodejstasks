@@ -10,6 +10,8 @@ router.use(bodyparser.json());
 
 router.post("/signin", user_login.user_create);
 
+router.get("/userlist", user_login.user_list);
+
 router.get("/welcome", user_login.user_welcome);
 
 module.exports = router;
