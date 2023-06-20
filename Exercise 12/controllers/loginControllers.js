@@ -1,16 +1,13 @@
 const asyncHandler = require("express-async-handler");
-let token = require("../middlewares/tokens");
+const token = require("../middlewares/tokens");
 const jwt = require("jsonwebtoken");
 const jwtKey = "my_secret_key";
-const jwtExpirySeconds = 300;
 
 exports.user_create = asyncHandler(async(req, res, next) =>{
 	const user = req.body;
   	console.log("Username: ", user.username);
   	console.log("Password: ", user.password);
-  	token.userdata.push(user);
-  	console.log(token.userdata);
-  	
+  	token.userdata.push(user); 	
 	let isPresent = false;
 	let isPresentIndex = null;
 
@@ -36,7 +33,6 @@ exports.user_create = asyncHandler(async(req, res, next) =>{
 			error: "please check name and password.",
 		});
 	}
-    /* res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 }); */
 });
 
 exports.user_list =asyncHandler(async(req, res, next)=>{
@@ -44,57 +40,18 @@ exports.user_list =asyncHandler(async(req, res, next)=>{
 })
 
 exports.user_welcome =asyncHandler(async(req,res,next)=>{
-    const tokens = req.header('Authorization');
-	console.log(tokens);
-	/* console.log(token); */
-	/* if(tokens){
-		const decode = jwt.verify(tokens, jwtKey);
-		console.log(decode);
-		res.json({
-			login :true,
-			data: decode,
-		});
-	}
-	else{
-		res.json({
-			login: false,
-			data: "error",
-		});
-	} */
-	
-	/* const tokens = req.header('Authorization');
-    console.log(tokens);
-	if(token.username == tokens.username){
-		console.log(token.username);
-		res.send("Welcome user");
-        return; 
-		var payload
-		try {
-			payload = jwt.verify(token, jwtKey);
-			console.log(payload);
-		} 
-		catch (e) {
-			if (e instanceof jwt.JsonWebTokenError) {
-				return res.status(401).end()
-			}
-			return res.status(400).end()
+	jwt.verify(req.token, jwtKey, (err, authdata)=>{
+		if(err){
+			res.json({
+				message: false,
+				data: "error",
+			});
 		}
-		res.send(`Welcome ${payload.username}!`)
-	}
-	res.status(404).end(); */
-	/* if (!token) {
-		return res.status(401).end()
-	}
-
-	var payload
-	try {
-		payload = jwt.verify(token, jwtKey)
-	} 
-    catch (e) {
-		if (e instanceof jwt.JsonWebTokenError) {
-			return res.status(401).end()
+		else{
+			res.json({
+				message :"Welcome to profile",
+				data: authdata
+			});
 		}
-		return res.status(400).end()
-	}
-	res.send(`Welcome ${payload.username}!`) */
+	});
 });

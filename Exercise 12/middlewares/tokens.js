@@ -8,6 +8,18 @@ const token = jwt.sign({ username }, jwtKey, {
     expiresIn: jwtExpirySeconds,
 });
 
+function verifytoken(req, res, next) {
+    const authheader=req.headers['authorization'];
+    if (typeof authheader !== 'undefined') {
+        var bearer = authheader.split(' ')[1];
+        req.token = bearer;
+        console.log(req.token);
+        next();
+    } else {
+        res.sendStatus(403);
+    }
+}
+
 const userdata = [];
 
-module.exports={token,userdata};
+module.exports={token,userdata,verifytoken};

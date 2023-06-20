@@ -1,0 +1,4 @@
+info: Jun-20-2023 18:35:22: 	Server started and running on http://localhost:8000
+info: Jun-20-2023 18:35:26: 	Server Sent A Hello World!
+error: Jun-20-2023 18:35:30: 	500 - Internal Server Error - y is not defined - /calc - GET - ::1
+error: Jun-20-2023 18:35:35: 	400 || Not Found - /hello - GET - ::1

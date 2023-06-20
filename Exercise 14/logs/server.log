@@ -1,5 +1,0 @@
-error: Jun-16-2023 15:26:21: 	400 || Not Found - /hello - GET - ::1
-error: Jun-16-2023 15:26:27: 	500 - Internal Server Error - y is not defined - /calc - GET - ::1
-info: Jun-16-2023 15:26:32: 	Server Sent A Hello World!
-error: Jun-16-2023 15:47:52: 	400 || Not Found - /signin - POST - ::1
-error: Jun-16-2023 15:47:59: 	400 || Not Found - /signin - POST - ::1
