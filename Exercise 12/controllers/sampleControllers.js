@@ -5,7 +5,6 @@ exports.book_create = asyncHandler(async (req, res, next) => {
   const book = req.body;
   console.log("Id: ", book.Id);
   console.log("Book: ", book.Name);
-  console.log(book);
   books.push(book);
   res.send('Book is added to the database');
 });

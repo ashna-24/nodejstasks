@@ -6,9 +6,9 @@ const jwtKey = "my_secret_key";
 
 exports.user_create = asyncHandler(async(req, res, next) =>{
 	const user = req.body;
-  	console.log("Username: ", user.username);
-  	console.log("Password: ", user.password);
-  	token.userdata.push(user); 	
+	console.log("Username: ", user.username);
+	console.log("Password: ", user.password);
+	token.userdata.push(user); 	
 	let isPresent = false;
 	let isPresentIndex = null;
 
@@ -16,21 +16,21 @@ exports.user_create = asyncHandler(async(req, res, next) =>{
 		if((token.userdata[i].username === user.username) && (token.userdata[i].password === user.password)){
 			isPresent = true;
 			isPresentIndex = i;
-      		break;
+			break;
 		}
 	}
 
-	if (isPresent) {
+	if(isPresent){
 		const tokens = jwt.sign(token.userdata[isPresentIndex], jwtKey);
-  		logger.info(`Success login ${req.originalUrl} - ${req.method} - ${req.ip}`);
+		logger.info(`Success login ${req.originalUrl} - ${req.method} - ${req.ip}`);
 		res.json({
 			login: true,
 			token: tokens,
 			data: token.userdata[isPresentIndex],
 		});
-	} 
-	else {
-  		logger.error(`${err.status || 500} - ${res.statusMessage} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+	}
+	else{
+		logger.error(`${err.status || 500} - ${res.statusMessage} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 		res.json({
 			login: false,
 			error: "please check name and password.",
