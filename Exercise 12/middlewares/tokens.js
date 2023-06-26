@@ -13,7 +13,6 @@ function verifytoken(req, res, next) {
     if (typeof authheader !== 'undefined') {
         var bearer = authheader.split(' ')[1];
         req.token = bearer;
-        console.log(req.token);
         next();
     } else {
         res.sendStatus(403);

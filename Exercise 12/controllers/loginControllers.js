@@ -8,11 +8,11 @@ exports.user_create = asyncHandler(async(req, res, next) =>{
 	const user = req.body;
 	console.log("Username: ", user.username);
 	console.log("Password: ", user.password);
-	token.userdata.push(user); 	
+	token.userdata.push(user);
 	let isPresent = false;
 	let isPresentIndex = null;
 
-	for(let i=0; i< token.userdata.length;i++){
+	for(let i=0; i< token.userdata.length ;i++){
 		if((token.userdata[i].username === user.username) && (token.userdata[i].password === user.password)){
 			isPresent = true;
 			isPresentIndex = i;

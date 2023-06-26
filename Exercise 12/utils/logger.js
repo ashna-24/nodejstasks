@@ -9,7 +9,7 @@ module.exports = createLogger({
           format: 'MMM-DD-YYYY HH:mm:ss'
         }),
         format.align(),
-        format.printf(info => `${info.level}: ${[info.timestamp]}: ${info.message}`),
+        format.printf(info => `${info.level}: ${[info.timestamp]}: ${info.message}`)
       )
     }),
     new transports.Console({
