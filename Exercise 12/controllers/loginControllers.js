@@ -6,8 +6,8 @@ const jwtKey = "my_secret_key";
 
 exports.user_create = asyncHandler(async(req, res, next) =>{
 	const user = req.body;
-	console.log("Username: ", user.username);
-	console.log("Password: ", user.password);
+	// console.log("Username: ", user.username);
+	// console.log("Password: ", user.password);
 	token.userdata.push(user);
 	let isPresent = false;
 	let isPresentIndex = null;
@@ -39,11 +39,13 @@ exports.user_create = asyncHandler(async(req, res, next) =>{
 });
 
 exports.user_list =asyncHandler(async(req, res, next)=>{
-	res.json(token.userdata);
+	res.json({
+		token: token,
+	});
 })
 
 exports.user_welcome =asyncHandler(async(req,res,next)=>{
-	jwt.verify(req.token, jwtKey, (err, authdata)=>{
+	jwt.verify(req.tokens, jwtKey, (err, authdata)=>{
 		if(err){
 			logger.error(`${err.status || 500} - ${res.statusMessage} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 			res.json({

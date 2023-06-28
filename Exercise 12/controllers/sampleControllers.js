@@ -3,10 +3,11 @@ let books = require('../shared-data/books');
 
 exports.book_create = asyncHandler(async (req, res, next) => {
   const book = req.body;
-  console.log("Id: ", book.Id);
-  console.log("Book: ", book.Name);
   books.push(book);
-  res.send('Book is added to the database');
+  res.status(200).json({
+    Added: true,
+    Data: books,
+  });
 });
 
 exports.book_list = asyncHandler(async (req, res, next) => {
@@ -30,10 +31,10 @@ exports.book_delete = asyncHandler(async (req, res, next) => {
     if (i.Id !== id) {
         return true;
     }
-    res.send('Book is deleted');
+    res.status(200).send('Book is deleted...!!');
     return false;
   });
-  res.status(404).send('Book not found');
+  res.status(404).send('Book not found!!');
 });
 
 exports.book_update = asyncHandler(async (req, res, next) => {
@@ -45,5 +46,8 @@ exports.book_update = asyncHandler(async (req, res, next) => {
       books[i] =newbook;
     }
   }
-  res.send("Book is edited");
+  res.status(200).json({
+    Edited: "Book is updated...!!",
+    Data: books,
+  });
 }); 

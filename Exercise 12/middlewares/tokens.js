@@ -12,9 +12,10 @@ function verifytoken(req, res, next) {
     const authheader=req.headers['authorization'];
     if (typeof authheader !== 'undefined') {
         var bearer = authheader.split(' ')[1];
-        req.token = bearer;
+        req.tokens = bearer;
         next();
-    } else {
+    } 
+    else {
         res.sendStatus(403);
     }
 }

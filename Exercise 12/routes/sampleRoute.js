@@ -8,14 +8,14 @@ router.use(cookieParser());
 router.use(bodyparser.urlencoded({extended: false}));
 router.use(bodyparser.json());
 
-router.post("/book",book_controller.book_create);
+router.post("/books",book_controller.book_create);
 
 router.get("/books",book_controller.book_list);
 
-router.get("/book/:id",book_controller.book_detail);
+router.get("/books/:id",book_controller.book_detail);
 
-router.delete("/book/:id", book_controller.book_delete);
+router.delete("/books/:id", book_controller.book_delete);
 
-router.put("/book/:id",book_controller.book_update);
+router.put("/books/:id",book_controller.book_update);
 
 module.exports = router;
