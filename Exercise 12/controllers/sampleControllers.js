@@ -4,7 +4,7 @@ let books = require('../shared-data/books');
 exports.book_create = asyncHandler(async (req, res, next) => {
   const book = req.body;
   books.push(book);
-  res.status(200).json({
+  res.status(201).json({
     Added: true,
     Data: books,
   });
