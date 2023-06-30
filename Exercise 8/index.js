@@ -1,17 +1,10 @@
 const express = require("express");
-const path = require('path');
 const app = express();
 var PORT = 8000;
-/*   
-// View Engine Setup
-app.set("views", path.join(__dirname));
-app.set("view engine", "ejs"); */
   
 app.get("/user", function(req, res){
-  
     var name = req.query.name;
     var age = req.query.age;
-      
     console.log("Name :", name);
     console.log("Age :", age);
 })
@@ -30,11 +23,9 @@ app.use(express.urlencoded({extended:true}));
 
 app.post('/signup', function (req, res) {
   const data = req.body;
-
   console.log("Name: ", data.name);
   console.log("Age: ", data.age);
   console.log("Gender: ", data.gender);
-
   res.json(data);
 });
 

@@ -48,13 +48,13 @@ app.delete('/book/:id', (req, res) => {
 app.put('/book/:id', (req, res) =>{
     const id = Number(req.params.id);
     const newbook = req.body;
-    for (let i = 0; i < books.length; i++) {
+    for (let i = 0; i < books.length; i++){
         let book = books[i]
         if (book.id === id) {
             books[i] = newbook;
         }
     }
     res.send('Book is edited');
-})
+});
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

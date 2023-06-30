@@ -8,7 +8,6 @@ const port = 8000;
 app.use('/uploads', express.static(path.join(__dirname, '/images')));
 
 app.post('/upload', (req, res, next) => {
-    
     var storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, 'images');
@@ -19,21 +18,19 @@ app.post('/upload', (req, res, next) => {
             return file;
         }
     });
-    
     var upload = multer({storage: storage}).single('image');
-
     upload(req,res,function(error){
         if (error) {
             console.error(error);
             return res.status(201).json({
-                status: "failed",
+                status: "Failed",
                 message: 'File uploded failed'
             });
         }
         else {
             res.send(req.file)
             return res.status(201).json({
-                status: "success",
+                status: "Success",
                 message: 'File uploded successfully',
             });
         } 
@@ -42,7 +39,6 @@ app.post('/upload', (req, res, next) => {
 
 app.get('/download/:id', function(req, res){
     const files = `${__dirname}/images/${String(req.params.id)}`;
-   /*  res.download(files); */
     fs.readFile(files, (err, file) => {
         if (err) {
             return res.status(201).send('Could not download file');
