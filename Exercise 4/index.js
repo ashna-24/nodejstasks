@@ -22,7 +22,7 @@ function sum(x,y,callbackrslt){
             result1 = (+x) + (+y);
             callbackrslt(null,result1);
         }
-    },100);
+    },2000);
 }
 
 function sub(x,y,callbackrslt){
@@ -36,7 +36,7 @@ function sub(x,y,callbackrslt){
             result2 = x - y;
             callbackrslt(null,result2);
         }
-    },100);
+    },1000);
 }
 
 function mult(x,y,callbackrslt){
@@ -50,7 +50,7 @@ function mult(x,y,callbackrslt){
             result3 = x * y;
             callbackrslt(null,result3);
         }
-    },100);
+    },3000);
 }
 
 function division(x,y,callbackrslt){
@@ -65,7 +65,7 @@ function division(x,y,callbackrslt){
             callbackrslt(null,result4);
         }
     }
-    ,100);
+    ,2000);
 }
 
 sum(x,y,function(err, data){

@@ -1,6 +1,8 @@
 const args = process.argv;
 args.forEach((arg, index) => {
-    console.log('Argument ' + index + ': ' + arg);
+    setTimeout(()=>{ 
+        console.log('Argument ' + index + ': ' + arg);
+    },2000);
 });
 
 if (args.length === 2) {
@@ -12,18 +14,20 @@ else if(args.length === 3){
     process.exit(1);
 }
 else{
-    function sum(){
-        var sum = 0; 
-        for(var i=2;i<args.length;i++){
-            if(isNaN(Number(args[i]))){
-                console.log("Invalid data");
-                return;
+    setTimeout(()=>{
+        function sum(){
+            var sum = 0; 
+            for(var i=2;i<args.length;i++){
+                if(isNaN(Number(args[i]))){
+                    console.log("Invalid data");
+                    return;
+                }
+                else{
+                    sum = (+sum) + (+args[i]);
+                }
             }
-            else{
-                sum = (+sum) + (+args[i]);
-            }
+            console.log(sum);
         }
-        console.log(sum);
-    }
-    sum();
+        sum();
+    },3000);
 }

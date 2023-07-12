@@ -20,7 +20,6 @@ app.get('/:id', (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-
 app.post('/signup', function (req, res) {
   const data = req.body;
   console.log("Name: ", data.name);

@@ -1,4 +1,4 @@
-let x = 30;
+let x = "hhasdhqavsd";
 let y = 10;
 
 function isnumber(x,y){
